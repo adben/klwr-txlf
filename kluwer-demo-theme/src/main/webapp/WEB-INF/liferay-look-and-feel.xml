@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!DOCTYPE look-and-feel PUBLIC "-//Liferay//DTD Look and Feel 6.1.0//EN" "http://www.liferay.com/dtd/liferay-look-and-feel_6_1_0.dtd">
+
+<look-and-feel>
+    <compatibility>
+        <version>6.1.0+</version>
+    </compatibility>
+    <theme id="kluwer-demo-theme" name="Kluwer demo theme">
+        <settings>
+            <setting configurable="true" type="text" key="background-image-url" value=""/>
+            <setting configurable="true" type="text" key="background-color" value=""/>
+            <setting configurable="true" type="checkbox" key="portlet-setup-show-borders-default" value="false" />
+            <setting configurable="true" type="text" key="siteId" value="1020" />
+            <setting configurable="true" type="text" key="top-banner-id" value="" />
+            <setting configurable="true" type="checkbox" key="disable-global-navigation" value="false" />
+            <setting configurable="true" type="checkbox" key="show-page-title-and-rss" value="false" />
+            <setting configurable="true" type="text" key="rss-url" value="" />
+            <setting configurable="true" type="checkbox" key="show-breadcrumbs" value="false" />
+            <setting configurable="true" type="text" key="crumb-prefix-link" value="home" />
+            <setting configurable="true" type="checkbox" key="enable-sitestat" value="false" />
+            <setting configurable="true" type="text" key="sitestat-url" value="" />
+            <setting configurable="true" type="text" key="login-webcontent-id" value="" />
+            <setting configurable="true" type="text" key="registration-webcontent-id" value="" />
+            <setting configurable="true" type="checkbox" key="registration-form-show-eip-fields" value="false" />
+            <setting configurable="true" type="checkbox" key="hide-homepage-navigation" value="false" />
+            <setting configurable="true" type="text" key="subnavigation-webcontent-id" value="" />
+            <setting configurable="true" type="checkbox" key="show-categories-and-labels" value="true" />
+        </settings>  
+    </theme>
+</look-and-feel>

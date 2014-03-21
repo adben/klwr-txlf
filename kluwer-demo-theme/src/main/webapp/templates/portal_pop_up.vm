@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+
+#parse ($init)
+
+<html dir="#language ("lang.dir")" lang="$w3c_language_id">
+
+<head>
+	<title>$the_title</title>
+
+	$theme.include($top_head_include)
+</head>
+
+#set ($theme_name = $theme_display.getTheme().getName().toLowerCase().replace(" theme",""))
+#set ($css_class = $css_class + " " + $theme_name)
+#if($theme_display.isWidget())
+    #set ($css_class = $css_class + " widget")
+#end
+
+<body class="portal-popup $css_class">
+
+#if($theme_display.isWidget())
+    <div id="wrapper">
+#end
+        $theme.include($content_include)
+        
+        $theme.include($bottom_ext_include)
+#if($theme_display.isWidget())
+    </div>
+#end
+    
+
+</body>
+
+</html>

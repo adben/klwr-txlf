@@ -1,0 +1,9 @@
+#*
+This file allows you to override and define new Velocity variables.
+*#
+
+#if ($pageSubtitle)
+	#set ($the_title = $languageUtil.get($locale, $the_title, $page.getName($locale)))
+#end
+
+#set($manageMyAccount = $languageUtil.get($locale, "manage-my-account"))

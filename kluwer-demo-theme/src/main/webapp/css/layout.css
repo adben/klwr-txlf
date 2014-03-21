@@ -1,0 +1,105 @@
+/* ---------- Wrapper ---------- */
+
+.portlet-layout {
+	border-collapse: collapse;
+	clear: both;
+	display: table;
+	border-spacing: 0;
+	table-layout: auto;
+	width: 100%;
+}
+
+.portlet-column {
+	display: table-cell;
+	vertical-align: top;
+}
+
+.portlet-column-content {
+	padding: 5px;
+}
+
+.portlet-column-content.empty {
+	padding: 50px 0;
+	width: auto !important; 
+}
+
+.portlet-column-content-only, .ltr .portlet-column-content-first, .rtl .portlet-column-content-last {
+	padding-left: 0;
+}
+
+.portlet-column-content-only, .ltr .portlet-column-content-last, .rtl .portlet-column-content-first {
+	padding-right: 0;
+}
+
+/* ---------- Column widths ---------- */
+
+#main-content.column-1 { clear: left; overflow: hidden; }
+
+#main-content.dragging .portlet-column {
+	border: 3px double #828F95;
+	height: 100px;
+	min-height: 100px;
+}
+
+.ie6, .ie7 {
+	div.portlet-layout {
+		height: 1%;
+	}
+
+	div.portlet-column {
+		float: left;
+		overflow: hidden;
+		width: 100%;
+	}
+
+	div.aui-column-last {
+		margin-right: -1px;
+	}
+
+	.portlet-column-content {
+		zoom: 1;
+	}
+}
+
+.columns-max #column-1 { padding-top: 5px; }
+
+.troika-columns-1-2-1 {
+	.portlet-column.aui-w6-7, #layout-column_column-1 { width: 824px!important;}
+	#layout-column_column-1 { padding-bottom: 0; padding-top: 15px; }
+    #column-2 { 
+        width: 478px!important;
+        #layout-column_column-2 { padding-top: 0; width: 478px; }
+        .portlet-column-content { padding-left: 0; }
+    }
+    #column-3 { width: 336px!important;
+        #layout-column_column-3 { padding-top: 0; width: 336px; }
+    }
+    #column-4 { width: 120px!important;
+       #layout-column_column-4 { padding-top: 15px; width: 120px; } 
+    }
+}
+
+.troika-columns-3 {
+	#column-1 { 
+	   width: 478px;
+	   #layout-column_column-1 { padding-top: 15px; width: 478px; }
+	   .portlet-column-content { padding-left: 0; }
+	}
+    #column-2 { width: 336px!important;
+        #layout-column_column-2 { padding-top: 15px; width: 336px; }
+    }
+    #column-3 { width: 120px!important;
+        #layout-column_column-3 { padding-top: 15px; width: 120px; }
+    }
+}
+
+.troika-columns-2 {
+    #column-1 { 
+       width: 824px!important;
+       #layout-column_column-1 { padding-top: 15px; width: 824px; }
+       .portlet-column-content { padding-left: 0; }
+    }
+    #column-2 { width: 120px!important;
+        #layout-column_column-2 { padding-top: 15px; width: 120px; }
+    }
+}

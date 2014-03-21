@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+
+#macro (showNodeChildren $nodeName $showBaseNodeName $useContainer)
+    #foreach($kluPage in $kluwerPages)
+        #if($nodeName.equals($kluPage.getName($locale)))
+            #if($showBaseNodeName == true)
+                <li>
+					#if($kluPage.getHTMLTitle($locale) != $kluPage.getName($locale))
+						<span class="title">$kluPage.getHTMLTitle($locale)</span>
+					#end
+                    
+            #end
+            #set($kluPageChildren = $kluPage.getChildren($themeDisplay.getPermissionChecker()))
+            #if($kluPageChildren.size() > 0 && $useContainer == true)
+                <ul>
+            #end
+            #foreach($kluPageChild in $kluPageChildren)
+                <li>
+                    <a href="$!kluPageChild.getRegularURL($request)" $!kluPageChild.getTarget() >$kluPageChild.getHTMLTitle($locale)</a>
+                </li>
+            #end
+            #if($kluPageChildren.size() > 0 && $useContainer == true)
+                </ul>
+            #end
+            #if($showBaseNodeName == true)
+                </li>
+            #end
+            #break
+        #end
+    #end
+#end    
+
+#macro (showArticleContent $article_id)
+	#set($articleContent = $!journalContentUtil.getContent($themeDisplay.getCompanyGroupId(), "$!article_id", null, "$!locale", $theme_display))
+	#if ($articleContent)
+		$articleContent
+	#else
+		$!journalContentUtil.getContent($getterUtil.getLong("$!group_id"), "$!article_id", null, "$!locale", $theme_display)
+	#end
+#end
+
+#parse ($init)
+
+<html class="#language("lang.dir")" dir="#language("lang.dir")" lang="$w3c_language_id" 
+    xmlns:fb="http://www.facebook.com/2008/fbml" xmlns:og="http://opengraphprotocol.org/schema/"
+    xmlns="http://www.w3.org/1999/xhtml">
+
+    <head>
+        <title>$the_title - $company_name</title>
+    
+        $theme.include($top_head_include)
+    </head>
+    
+    #set ($portal_bg_image_url = $theme_display.getThemeSetting('background-image-url'))
+    #set ($theme_name = $theme_display.getTheme().getName().toLowerCase().replace(" theme",""))
+    #set ($css_class = $css_class + " " + $theme_name)
+    #set ($css_class = $css_class + " " + $locale.toString())
+    #set ($portal_bg_color = $theme_display.getThemeSetting('background-color'))
+    <body class="$css_class">
+        <div class="page-background" #if($portal_bg_color && $portal_bg_color != "")style="background-color: $portal_bg_color;"#end>
+            #if($portal_bg_image_url != "")
+                <img src="$!portal_bg_image_url" alt="">
+            #end
+        </div>
+            
+        $theme.include($body_top_include)
+        
+        #set($userLocalService = $serviceLocator.findService("com.liferay.portal.service.UserLocalService"))
+        #set($currentUser = $userLocalService.getUser($user_id))
+        #set($showDockbar = false)
+        #foreach($role in $currentUser.getRoles())
+            #if($role.getName() == "Administrator" || $role.getName() == "Dockbar")
+                #set($showDockbar = true)
+            #end
+        #end
+        #if ($is_signed_in && $showDockbar)
+            #dockbar()
+        #end
+        
+        <div id="headerBox">
+            <ul class="links">
+                #showNodeChildren("toplinks",false)
+                #if ($is_signed_in)
+                    <li class="f-right"><a href="$sign_out_url">Uitloggen</a></li>
+                    <li class="f-right">
+                        <a class="user-fullname use-dialog" data-controlpanelcategory="my" href="$themeDisplay.getURLMyAccount().toString()" title='$manageMyAccount'>
+                            $user_name 
+                        </a>
+                    </li>
+                #else
+                    <li class="f-right"><a href="$portalUtil.getCreateAccountURL($request, $themeDisplay)">Registreren</a></li>
+                    <li class="f-right"><a href="$sign_in_url">Inloggen</a></li>
+                #end
+            </ul>
+        </div>
+        
+        <div id="wrapper">
+        
+            <header id="banner" role="banner">
+                <div id="heading">
+                    <h1 class="company-title">
+                    	#set($portalLogoURL = $themeDisplay.getPortalURL())
+                        <a class="$logo_css_class" href="$portalLogoURL" title="#language("go-to") $site_name">
+                           <img alt="$logo_description" height="$site_logo_height" src="$site_logo" width="$site_logo_width" />
+                        </a>
+                        #set($topBannerID = $!theme_display.getThemeSetting('top-banner-id'))
+                        #if($topBannerID != "")
+                            <div class="f-right">
+                                #showArticleContent($topBannerID)
+                            </div>
+                        #end
+                    </h1>
+                </div>
+        
+                #if ($has_navigation || $is_signed_in)
+                    #parse ("$full_templates_path/navigation.vm")
+                #end
+                
+            </header>
+        
+            <div id="content">
+            	#set($firstLayoutPage = $nav_items.get(0).getLayout().friendlyURL)
+				#set($curLayoutPage = $layout.friendlyURL)
+                    #if($theme_display.getThemeSetting('show-breadcrumbs') == "true" && ($curLayoutPage != $firstLayoutPage))
+                    <nav class="site-breadcrumbs" id="breadcrumbs">
+						#set ($breadcrumb_tag = $theme.getBreadcrumbTag())
+						$breadcrumb_tag.setShowGuestGroup(false)
+						#### #if($page.hidden == true)
+						#### 	#set($layoutLocalService = $serviceLocator.findService("com.liferay.portal.service.LayoutLocalService"))
+						#### 	#set($currentLayout = $layoutLocalService.getLayout($page.plid))
+						#### 	#set($parentLayout = $layoutLocalService.getLayout($currentLayout.getParentPlid()))
+						#### 	#if($parentLayout)
+						#### 		$breadcrumb_tag.setSelLayout($parentLayout)
+						#### 	#end
+						#### #end
+						## $breadcrumb_tag.setShowParentGroups(false)
+						$breadcrumb_tag.runTag()
+                    </nav>
+                #end
+                #if($theme_display.getThemeSetting('show-page-title-and-rss') == "true")
+                    <div class="page-title">
+                        <span class="title">$the_title</span>
+                        <a class="rss" href="$!theme_display.getThemeSetting('rss-url')"></a>
+                    </div>
+                #end
+        
+                #if ($selectable)
+                    $theme.include($content_include)
+                #else
+                    $portletDisplay.recycle()
+                    $portletDisplay.setTitle($the_title)
+                    $theme.wrapPortlet("portlet.vm", $content_include)
+                #end
+            </div>
+        
+            <footer id="footer" role="contentinfo">
+                <ul class="sitemap">
+                    #showNodeChildren("column1",true,true)
+                    #showNodeChildren("column2",true,true)
+                    #showNodeChildren("column3",true,true)
+                    #showNodeChildren("column4",true,true)
+                </ul>
+                <img class="f-left" src="/kluwer-demo-theme/images/kluwer-footer-logo.png"/>
+                <span class="a-left">Copyright &copy; Kluwer 2010-$the_year</span>
+                <ul class="f-right bottomlinks">
+                    #showNodeChildren("bottomlinks",false)
+                </ul>
+            </footer>
+        </div>
+        $theme.include($body_bottom_include) 
+        
+        #set ($sitestatEnabled = $!theme_display.getThemeSetting("enable-sitestat"))
+        #if($sitestatEnabled && !$theme_display.scopeGroup.isControlPanel())
+			#set($sitestatUrl = $!theme_display.getThemeSetting("sitestat-url"))
+			#if($sitestatUrl && $sitestatUrl.trim().length()>0)
+	            ## Sitestat4 counter	            
+	            ## SiteStat: build counter name
+				
+				#set($breadcrumbsShowGuestGroup = $propsUtil.get("breadcrumb.show.guest.group"))
+				#set($breadcrumbsShowParentGroups = $propsUtil.get("breadcrumb.show.parent.groups"))
+				#set($breadcrumbsItemsNamesList = [])
+				
+				#### #if($breadcrumbsShowGuestGroup)
+				####	#set($suppressOutput = $breadcrumbsItemsNamesList.add($theme_display.getAccount().getName()))
+				#### #else
+				####	#set($suppressOutput = $breadcrumbsItemsNamesList.add("Home"))
+				#### #end
+				#if($breadcrumbsShowParentGroups)
+					#set($organizationLocalService = $serviceLocator.findService("com.liferay.portal.service.OrganizationLocalService"))
+					#macro(addParentGroupBreadcrumb $tehGroup $breadcrumbsList $privateLayout)
+						
+						#if($tehGroup.isOrganization())
+							#set($tehOrganization = "")
+							#set($tehOrganization = $organizationLocalService.getOrganization($tehGroup.getOrganizationId()))
+							#set($parentOrganization = "")
+							#set($parentOrganization = $tehOrganization.getParentOrganization())
+
+							#if ($parentOrganization && $parentOrganization != "")
+								#set($tehParentGroup = "")
+								#set($tehParentGroup = $parentOrganization.getGroup())
+								#addParentGroupBreadcrumb($tehParentGroup, $breadcrumbsList, $privateLayout)
+							#end
+						#elseif($tehGroup.isUser())
+							#set($organizations = "")
+							#set($organizations = $organizationLocalService.getUserOrganizations($tehGroup.getClassPK()))
+
+							#if($organizations != "" && (!$organizations.isEmpty()))	
+								#set($tehOrganization = "")
+								#set($tehOrganization = $organizations.get(0))
+								#set($tehParentGroup = "")
+								#set($tehParentGroup = $tehOrganization.getGroup())
+								
+								#addParentGroupBreadcrumb($tehParentGroup, $breadcrumbsList, $privateLayout)
+							#end
+						#end
+						
+						#set($layoutsPageCount = 0)
+						#if ($privateLayout)
+							#set($layoutsPageCount = $tehGroup.getPrivateLayoutsPageCount())
+						#else
+							#set($layoutsPageCount = $tehGroup.getPublicLayoutsPageCount())
+						#end
+
+						#if(($layoutsPageCount > 0) && !$tehGroup.getName().equals("Guest")) {
+							#set($suppressOutput = $breadcrumbsItemsNamesList.add($tehGroup.getDescriptiveName()))
+						#end
+					#end					
+					
+					#addParentGroupBreadcrumb($theme_display.getScopeGroup(), $breadcrumbsList, $theme_display.getLayout().isPrivateLayout())
+				#end
+				
+				#set($insertPoint = $breadcrumbsItemsNamesList.size())
+				#set($insertPoint = $insertPoint-1)
+				#if($insertPoint<1)
+					#set($insertPoint = 0)
+				#end
+				#foreach($ancestor in $layout.getAncestors())
+					#if(!$ancestor.isHidden())
+						#set($suppressOutput = $breadcrumbsItemsNamesList.add($insertPoint, $ancestor.getName($locale)))
+					#end
+				#end
+				#if(!$layout.isHidden())
+					#set($suppressOutput = $breadcrumbsItemsNamesList.add($layout.getName($locale)))
+				#end
+				
+				#set($breadcrumbEntries = $!portalUtil.getPortletBreadcrumbs($request))				
+				#foreach($breadcrumbEntry in $breadcrumbEntries) {
+					#set($breadcrumbEntryTitle = "")
+					#set($breadcrumbEntryTitle = $breadcrumbEntry.getTitle())
+					#if($breadcrumbEntryTitle.trim().length()>0)
+						#set($suppressOutput = $breadcrumbsItemsNamesList.add($breadcrumbEntryTitle))
+					#end
+				#end
+				
+				#set ($counterName = "")
+				#foreach ($breadcrumbItemName in $breadcrumbsItemsNamesList)
+					#set ($counterName = $counterName+'.'+$breadcrumbItemName.toLowerCase().replaceAll("[^A-Za-z0-9]", "_"))
+				#end
+				#if($counterName.length()>0)
+					#set ($counterName = $counterName.substring(1))
+				#end				
+				
+	            #### #set ($counterName = $layout.getName($locale).toLowerCase().replaceAll("[^A-Za-z0-9]", "_"))
+	            #### #foreach ($ancestor in $layout.getAncestors())
+	            ####     #set ($counterName = $ancestor.getName($locale).toLowerCase().replaceAll("[^A-Za-z0-9]", "_") + '.' + $counterName) 
+	            #### #end
+				#### #if($assetPublisherViewContentActionParams && $assetPublisherViewContentActionParams.size()>0)
+				#### 	#set($apItemUrlTitle = "")
+				#### 	#foreach($urlTitleParamVal in $assetPublisherViewContentActionParams.get("urlTitle"))
+				#### 		#set($apItemUrlTitle = $urlTitleParamVal)
+				#### 	#end
+				#### 	#if($apItemUrlTitle && $apItemUrlTitle.trim().length()>0)
+				#### 		#set($counterName = $counterName+'.'+$apItemUrlTitle.toLowerCase().replaceAll("[^A-Za-z0-9]", "_"))
+				#### 	#end
+				#### #end
+	    
+	            <!-- Begin Sitestat4 code -->
+	            <script>
+	                function sitestat(ns_l) {
+						#if($!theme_display.isSignedIn()) 
+							var userid = '$!theme_display.user.userId';
+							ns_l += '&amp;userid='+userid;
+						#end
+	                    ns_l += '&amp;ns__t=' + (new Date()).getTime();
+	                    ns_pixelUrl = ns_l;
+	                    ns_0 = document.referrer;
+	                    ns_0 = (ns_0.lastIndexOf('/') == ns_0.length - 1) ? ns_0.substring(ns_0.lastIndexOf('/'), 0) : ns_0;
+	                    if (ns_0.length > 0)ns_l += '&amp;ns_referrer=' + escape(ns_0);
+	                    if (document.images) {
+	                        ns_1 = new Image();
+	                        ns_1.src = ns_l;
+	                    } else
+	                        document.write('<img src="' + ns_l + '" width="1" height="1" alt="">');
+	                }
+					var sitestatLink = "$!sitestatUrl/s?$counterName";
+					#if($request.getAttribute("nl.kluwer.sitestats.search.searchportlet.searchrequest"))
+						#set($searchKeyword = "geen")
+						#set($searchKeyword = $request.getAttribute("nl.kluwer.sitestats.search.searchportlet.keywords"))
+						#if($searchKeyword.trim().length()<1)
+							#set($searchKeyword = "geen")
+						#end
+						#set($resultsCount = 0)
+						#set($resultsCount = $request.getAttribute("nl.kluwer.sitestats.search.searchportlet.resultscount"))
+						sitestatLink += '&amp;ns_search_term=$searchKeyword';
+						sitestatLink += '&amp;ns_search_result=$resultsCount';
+					#end
+					#if($assetPublisherViewContentActionParams && $assetPublisherViewContentActionParams.size()>0)
+						#set($apItemUrlTitle = "")
+						#foreach($urlTitleParamVal in $assetPublisherViewContentActionParams.get("urlTitle"))
+							#set($apItemUrlTitle = $urlTitleParamVal)
+						#end
+						#if($apItemUrlTitle && $apItemUrlTitle.trim().length()>0)
+							sitestatLink += '&amp;artikel=$!apItemUrlTitle.toLowerCase().replaceAll("[^A-Za-z0-9]", "_")';
+						#end
+					#end
+	                sitestat(sitestatLink);
+	            </script>
+	            <noscript>
+	                <img src="$!sitestatUrl/s?$counterName" width="1" height="1" alt="">
+	            </noscript>
+	            <!-- End Sitestat4 code -->
+	            
+	            ## Set javascript global for sitestat actions
+	            <script>window.troikaSitestatUrl = "$sitestatUrl";</script>
+			#else
+				<!-- Sitestat URL is not configured -->
+			#end
+        #end
+		#### Sitestat techinical measurement - should be rendered on home page only, according to documentation.
+		#if($sitestatEnabled && $theme_display.scopeGroup.isGuest() && ($theme_display.getPlid() == $theme_display.scopeGroup.getDefaultPublicPlid()))
+			#if($sitestatUrl && $sitestatUrl.trim().length()>0)
+				<!-- Begin Sitestat4 Technical code --> 
+				<script language='JavaScript1.1' type='text/javascript' src='$javascript_folder/sitestat.js'></script> 
+				<!-- End Sitestat4 Technical code -->
+			#end
+		#end
+    </body>
+    
+    $theme.include($bottom_include)
+
+</html>

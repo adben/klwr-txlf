@@ -1,0 +1,768 @@
+$color-text-default: #666666;
+$color-text-purple: #663366;
+$color-text-lightpurple: #886688;
+$color-text-golden: #999933;
+
+$color-line-golden: #DDDDAA;  
+$color-bg-golden: #F9F9F3;
+$color-bg-lightpurple: #F6F3F6;
+$color-bg-purple: #DDD7DD;
+
+@mixin portlet-title { 
+    color: $color-text-golden; font-family: Georgia; font-size: 18px; 
+    font-weight: bold; font-style: italic;    
+}
+
+body.taxlife {
+    font-family: Arial,sans-serif;
+    
+    a { color: $color-text-purple; }
+    
+    .page-background { background-color: #001122; }
+    &.signed-in.controls-visible .portlet-topper:hover,
+    .aui-portal-layout-proxy .portlet-topper { background-color: $color-bg-golden; }
+    
+    /* ---------- Login portlet styling ---------- */
+    
+   .portlet-login, #wrapper .portlet-login {
+        .aui-form {
+            background-color: $color-bg-golden; border-color: $color-line-golden; 
+            .aui-field-label { color: $color-text-purple; }
+        } 
+        .aui-button {
+            .aui-button-input { 
+                background-color: $color-text-purple; 
+                &:hover {
+                    background-color: #4E274E;
+                }
+            }
+        }
+    }
+    
+    .aui-dialog-content {
+        .aui-panel-hd {
+            .aui-panel-hd-text {
+                @include portlet-title;
+            }
+        }
+    }
+
+    #wrapper {
+       padding: 10px 0 20px;
+       width: 974px;
+
+        #heading {
+           .company-title { float: none; margin: 0 10px; width: auto; }
+           .logo img { margin: 5px 10px 0 15px; }
+        }
+        #navigation, #navigation-non-editable {
+            li a { color: #FFFFFF; font-weight: bold; 
+                &:hover { color: $color-text-golden; }
+            }
+        }
+        
+        #subnavigation {
+            ul.child-menu li { 
+                a { 
+                    color: $color-text-purple;
+                    &:hover { color: $color-text-golden; }
+                }
+                &.selected a { color: $color-text-golden; }    
+            }
+        }
+        
+        #content { margin: 0 10px; }
+        
+        .page-title {
+            .title {
+               color: $color-text-purple; font-family: Georgia; font-style: italic;
+            }
+        }
+        
+        .site-breadcrumbs { 
+            ul li {  
+                span a { color: $color-text-purple; 
+                    &:hover { color: $color-text-golden; }
+                }
+            }
+        }
+        
+        .portlet .portlet-title-text { @include portlet-title; }
+        .portlet-msg-info, .lfr-token { background-color: $color-bg-golden; border-color: $color-line-golden;}
+        .lfr-token:hover { background-color: $color-bg-purple; }
+        
+        #footer {
+            margin: 0 10px; 
+            .sitemap { 
+                background-color: $color-bg-golden; border-top-color: $color-text-golden; border-bottom-color: $color-line-golden;
+                li .title { color: $color-text-golden; font-weight: bold; }
+                ul { 
+                    padding: 0 10px 8px;
+                    li { line-height: 23px; padding-left: 18px; }
+                }
+            }
+        }
+        
+              
+        .kluwer-structure, .portlet-polls-display, .portlet-message-boards, .web-form-portlet, .LinkedInLogin-portlet { 
+            .aui-button {
+                .aui-button-input { 
+                    background-color: $color-text-purple; 
+                    &:hover {
+                        background-color: #4E274E;
+                    }
+                }
+            } 
+        }
+        
+        /* ---------- Web content article default styling ---------- */
+        
+        .journal-content-article { 
+            .dossier-content {
+                .dossier-intro { 
+                    .dossier-link { color: $color-text-purple; }
+                }
+            }
+                
+            .movers-shakers {
+                h2 { color: $color-text-purple; }
+            }
+        }
+    
+        .journal-content-article, .portlet-blogs .entry-body {
+            h1 { color: $color-text-golden; }
+            ol {  
+                li {
+                    &:before { 
+                        color: $color-text-golden;
+                    }
+                }
+            }
+            
+            table { 
+               border-color: $color-line-golden;
+               tr { border-color: $color-line-golden; }
+            }
+        }
+            
+        /* ---------- Portlet polls display stying ---------- */
+            
+        .portlet-polls-display {
+            .aui-form {
+                border-bottom-color: $color-line-golden; 
+                border-top-color: $color-text-golden;
+                color: $color-text-purple;
+                background-color: $color-bg-golden;
+                table td.votes-percent { color: $color-text-golden; }
+            }
+        }
+        
+        /* ---------- Homepage Carousel stying ---------- */
+        
+        .banner-top {
+           border-color: $color-line-golden; font-family: Georgia;
+           a.banner-block-content-link {
+                font-style: italic; 
+                &.hover {
+                    color: #FFFFFF;
+                }
+            }
+        }
+        
+        .portlet-journal-content { 
+            .more-link { color: $color-text-golden; }
+            
+                       
+            /* -------- Twitter WC article -------- */
+            .twtr-widget { 
+                .twtr-tweet { border-bottom: 1px solid $color-line-golden; } 
+            }
+            #twtr-widget-1 .twtr-tweet a {
+                color: $color-text-purple !important;
+            }
+            &.golden .journal-content-article { background-color: $color-bg-golden; }
+            &.lightpurple .journal-content-article { background-color: $color-bg-lightpurple; }
+            &.purple .journal-content-article { background-color: $color-bg-purple; border-top: 1px solid $color-text-golden; }
+            &.golden .journal-content-article, &.lightpurple .journal-content-article { 
+                border-top: 1px solid $color-text-golden; 
+                border-bottom: 1px solid $color-line-golden; 
+            }
+        }
+        
+        /* ---------- Top Suggestions portlet ---------- */
+    
+        .topSuggestionsPortlet {
+            .sectionHeading { @include portlet-title; }
+            .title-list { 
+                background-color: $color-bg-golden; border-top: 1px solid $color-text-golden;
+                border-bottom: medium none; 
+                li { border-bottom: 1px solid $color-line-golden; border-top: medium none; }
+            }
+        }
+        
+        /* ---------- Asset Categories navigation portlet ---------- */
+    
+        .portlet-asset-categories-navigation {  
+            .lfr-panel-container { 
+                background-color: $color-bg-golden; border-bottom-color: $color-line-golden;
+                border-top-color: $color-text-golden;
+               }
+            .lfr-panel {
+                border-bottom-color: $color-line-golden; 
+                border-top-color: $color-text-golden;
+               }
+            .lfr-panel-title { color: $color-text-golden; }
+            .aui-tree-node-selected .aui-tree-label a { color: $color-text-purple; }
+            .lfr-panel-content .lfr-asset-category-list li .tag-selected { color: $color-text-golden; }
+        }
+        
+        /* ----------- Asset Publisher ----------------- */
+        
+        .golden.portlet-asset-publisher ul.title-list,
+        .golden.portlet-asset-publisher .asset-abstract.troika,
+        .golden.portlet-asset-publisher .videos-container { background-color: $color-bg-golden; }
+        
+        .lightpurple.portlet-asset-publisher ul.title-list,
+        .lightpurple.portlet-asset-publisher .asset-abstract.troika,
+        .lightpurple.portlet-asset-publisher .videos-container { background-color: $color-bg-lightpurple; }
+        
+        .purple.portlet-asset-publisher ul.title-list,
+        .purple.portlet-asset-publisher .asset-abstract.troika,
+        .purple.portlet-asset-publisher .videos-container { background-color: $color-bg-purple; }
+        .purple.portlet-asset-publisher .asset-abstract.troika { border-color: #FFFFFF; }
+        .purple.portlet-asset-publisher ul.title-list,
+        .purple.portlet-asset-publisher li.title-list,
+        .purple.portlet-asset-publisher .videos-container { border-bottom-color: #FFFFFF; }
+        
+        .portlet-asset-publisher {
+            .taglib-header {
+                border-color: $color-line-golden;
+                .header-title { @include portlet-title; }
+            }
+            
+            
+            ul.title-list {
+                border-top: 1px solid $color-text-golden; 
+            }
+            
+            li.title-list { 
+               border-bottom: 1px solid $color-line-golden; border-top: medium none;
+            }
+           
+           .asset-entries-group-label { @include portlet-title; }
+           .taglib-asset-categories-summary .asset-category,
+           .taglib-asset-tags-summary a { color: $color-text-lightpurple; }
+           .asset-metadata .metadata-entry { font-weight: normal; }
+           .metadata-author a { color: $color-text-lightpurple; }
+           .more-link { color: $color-text-golden; }
+            
+            .asset-categorization-title { @include portlet-title; }
+            
+            .verdieping.asset-abstract.troika {
+                background-color: $color-bg-lightpurple;
+            }
+            .users .abstract-journal-content .asset-small-image img,
+            .blog .abstract-journal-content .asset-small-image img { border-color:$color-line-golden; }
+            
+            .asset-entries-group-label { color: $color-text-golden; }
+            
+            .videos-container { 
+                border-bottom-color: $color-line-golden; border-top-color: $color-text-golden; }
+            
+            .asset-full-content.no-title { border-color: $color-line-golden; }
+            .agenda {
+                .agenda-title-list-enventdate { color: $color-text-golden; } 
+            }
+            
+            &.violet .title-list, .title-list.agenda { background-color: $color-bg-lightpurple;}
+        }
+        
+        .portlet-asset-publisher, .userslist-portlet {
+            .asset-abstract.troika { border-color: $color-line-golden; 
+                &.first { border-color: $color-text-golden; }
+            }
+            .search-results { 
+                background-color: transparent; border-top: medium none; margin-top: 0;
+                strong.journal-article-page-number { color: $color-text-golden; }
+            }
+        }
+        
+        .kluwer-structure { 
+           .header-title { @include portlet-title; }
+           .asset-user-actions { 
+                background-color: $color-bg-golden; border-bottom-color: $color-line-golden;
+                border-top-color: $color-text-golden;
+           }
+            
+           .taglib-discussion {
+                background-color: $color-bg-golden;
+                border-color: $color-line-golden;
+                
+                div[id*="_postReplyForm"] {
+                    background-color: $color-bg-golden !important;  
+                    border-color: $color-line-golden !important; 
+               }
+               
+               .aui-fieldset.add-comment  { 
+                   .aui-fieldset-content .discussion-reacties-count { @include portlet-title;}
+               }
+               
+               .lfr-discussion { border-color: $color-line-golden; } 
+                textarea.aui-field-input-text { 
+                    border-color: $color-line-golden; 
+                }
+                .taglib-ratings.thumbs a { color: $color-text-lightpurple; }
+            }
+            
+            .taglib-asset-links, .messageboard-links {
+                .asset-links-title { @include portlet-title; }
+                .asset-links-list { 
+                    background-color:$color-bg-golden; border-color: $color-line-golden;  
+                    .asset-links-list-item { border-color: $color-line-golden; }
+                }
+            }
+        }
+        
+        .asset-more a { color: $color-text-purple; }
+        
+        /* ---------- Blogs portlet styling ---------- */
+        
+        .portlet-blogs {
+            .kluwer-structure {
+                h1.header-title { @include portlet-title; }
+                   .entry-actions { background-color: $color-bg-golden; border-color: $color-line-golden; }
+                   .entry-footer {
+                    font-weight: normal;
+                    .entry-author, .entry-date { font-weight: normal; }
+                       .entry-author a, .taglib-asset-categories-summary .asset-category,
+                       .taglib-asset-tags-summary a { color: $color-text-lightpurple; }
+                   } 
+                   .separator { border-top-color: $color-line-golden; }
+                   .entry-navigation { background-color: $color-bg-golden; border-color: $color-line-golden; }
+                   .abstract.entry { 
+                    border-color: $color-line-golden;
+                    &.first { border-top-color: $color-text-golden; }
+                       .entry-more a { color: $color-text-purple; }
+                }
+                   .search-results { 
+                    strong.journal-article-page-number { color: $color-text-golden; }
+                   }
+            }
+            &.golden .kluwer-structure .abstract.entry { background-color: $color-bg-golden; }
+            &.lightpurple .kluwer-structure .abstract.entry { background-color: $color-bg-lightpurple; }
+            &.purple .kluwer-structure .abstract.entry { 
+                background-color: $color-bg-purple; border-color: #FFFFFF;
+                &.first { border-top-color: $color-text-golden; }
+               }
+        }
+        
+        /* ---------- Blogs aggregator portlet styling ---------- */
+        
+        .portlet-blogs-aggregator {
+            .entry-content-troika {
+                border-bottom-color: $color-line-golden;
+                border-top-color: $color-line-golden; 
+                &.first { border-top-color: $color-text-golden; }
+                
+                .asset-small-image img { border-color:$color-line-golden; }
+                .entry-info {
+                    .entry-more a { color: $color-text-purple; }
+                    .entry-author a { color: $color-text-lightpurple; }
+                    .entry-author, .entry-date { font-weight: normal; }
+                }
+            }
+            .search-results { 
+                background-color: transparent; border-top: medium none; border-top: medium none;
+                strong.journal-article-page-number { color: $color-text-golden; }
+            }
+            &.golden .entry-content-troika { background-color: $color-bg-golden; }
+            &.lightpurple .entry-content-troika { background-color: $color-bg-lightpurple; }
+            &.purple .entry-content-troika { 
+                background-color: $color-bg-purple; border-color: #FFFFFF;
+                &.first { border-top-color: $color-text-golden; }
+               }
+        }
+        
+        
+        /* ---------- Recent comments portlet stying ---------- */
+        .recentcomments-portlet {
+            .portlet-body .portlet-body {
+                border-top: 1px solid $color-text-golden;
+            }
+            .blog-blox {
+                background-color: $color-bg-purple;
+                border-bottom-color: #FFFFFF;
+                border-top-color: transparent;
+                margin-top: 0; 
+            }
+        }
+        
+        /* ---------- Related content portlet styling ---------- */
+        
+        .relatedcontentportlet-portlet {
+            .entry { 
+                background-color: $color-bg-purple;
+                border-color: #FFFFFF;  
+                &.first { border-top-color: $color-text-golden; }
+            }
+        }
+        
+        /* ---------- Sitemap portlet stying ---------- */
+    
+        .portlet-site-map {
+            .portlet-body > ul > li > span { 
+               border-top: 1px solid $color-line-golden; 
+               & > a { color: $color-text-golden; }
+            }
+        }
+        
+        /* ---------- Kluwer shop portlet stying ---------- */
+        
+        .main-content.carousel {
+           background-color: $color-bg-golden;
+           border-color: $color-line-golden;
+           
+           .product-item-name { color: $color-text-purple; }
+           .carouselcontainer { 
+               .productPrice strong, .buyButton { color: $color-text-golden; }
+           }
+        }
+        
+        .default { 
+           .product-spec { border-color: $color-line-golden; }
+           .buy-btn {
+                background-image: url("../images/shop/buy-btn.png");
+           }
+           a, .prod-name, .prod-serie a { color: $color-text-purple; }
+           .specialCat, .speccost, .specprice { color: $color-text-golden; }
+        }
+        
+        .main-content.compact {
+           border-color: $color-line-golden;
+        }
+        
+        .shopProductsListPortletContainer {
+           font-family: Arial,sans-serif;
+           
+           .breadcrumbsContainer { 
+                a {
+                    color: $color-text-purple; 
+                    &:hover { color: $color-text-golden;}
+                }
+           }
+            
+           .side-menu { 
+               h4 { color: $color-text-golden; }
+               & > div { border-color: $color-line-golden !important; }
+               ul li a { color: $color-text-purple; font-size: 12px; font-weight: normal; } 
+            }
+            
+            .cat-nav-top .sorteer-op .sort { 
+                color: $color-text-purple;  
+                .sorter-selected { border-color: $color-line-golden !important; }
+            }
+            .product-grid { 
+                font-family: Arial,sans-serif;
+                background-color: $color-bg-golden; border-color: $color-line-golden; 
+            }
+            .product-spec { border-color: $color-line-golden; }
+            .main-content .paginationContainer a { color: $color-text-purple; }
+        }
+        
+        .shopProductDetailContainer {
+            font-family: Arial,sans-serif;
+            .breadcrumbsContainer a { color: $color-text-purple !important; }
+            .productName { border-color: $color-line-golden; }
+            .productInfo {
+                .right { background-color: $color-bg-golden; border-color: $color-line-golden; }
+                .prod-serie, .prod-serie a { color: $color-text-purple; }
+            }
+            .rightBlock .productdetailauteurs a, .rightBlock .productdetailauteurs span {
+                color: $color-text-purple; 
+            }
+            
+            .orderForm {
+                font-family: Arial,sans-serif;
+                .tabs ul li.active {
+                    background-color: $color-bg-golden; border-color: $color-line-golden $color-line-golden $color-bg-golden; 
+                    h3 { color: $color-text-golden; }
+                }
+                .tabData { background-color: $color-bg-golden; border-color: $color-line-golden; 
+                   .skuOrderItem { border-color: $color-line-golden; }
+                   .submitOrderFormButton, .submitOrderFormButton:hover, .submitOrderFormButton:focus {
+                        background-image: url("../images/shop/btn-shop.png") !important;
+                   }
+                   a, a:hover { color: $color-text-purple; }
+                }
+            }
+        }
+        
+        .new-published-items-container ul, .top-items-container ul {
+            border-color: $color-line-golden;
+            li.product-entry {
+                border-color: $color-line-golden;
+                .product-item-name {
+                    color: $color-text-purple;
+                }
+            }
+        }
+    
+        .top-items-container {
+            .item-count { color: $color-text-golden; }
+            .product-item-name { color: $color-text-purple; }
+        }
+        
+        
+        /* ---------- Social networking portlet stying ---------- */
+    
+        .social-networking-portlet-summary {
+            .summary-container { 
+                background-color: $color-bg-golden; 
+                border-color: $color-line-golden;
+                 
+                .user-portrait {  
+                    img { border: 1px solid $color-line-golden; }
+                }
+                
+                h2 { color: $color-text-purple; }
+            }       
+        }
+        
+        /* ---------- Message boards (forum) portlet styling ---------- */
+
+        .portlet-message-boards {
+            .top-links-container {
+                .top-links-navigation { 
+                    .top-link { 
+                        border-color: $color-line-golden;  
+                        .taglib-text { color: $color-text-lightpurple; } 
+                        &.first .taglib-text { color: $color-text-purple; }
+                    }
+                }
+            }
+            .category-subscriptions a { color: $color-text-lightpurple; } 
+            .taglib-header { 
+               color: $color-text-golden; border-color: $color-line-golden;
+               .header-back-to a { color: $color-text-purple;}
+            }
+               
+           .lfr-panel-content {
+                .results-grid {
+                    .taglib-search-iterator {
+                        .results-header { 
+                            border-color: $color-text-purple;
+                            th {
+                                color: #FFFFFF;
+                            }
+                        }
+                        td { 
+                            background-color: $color-bg-golden; border-color: $color-line-golden;
+                            a strong { color: $color-text-purple; }
+                        }
+                    }
+                }
+            }
+            
+            #messageBoardsCategoriesPanel td.first {
+                .subcategory { color: $color-text-purple; }
+            }
+                
+            .lfr-panel-titlebar {
+                .lfr-panel-title span { color: $color-text-purple;}
+            }
+        }
+        
+        
+        /* ---------- Search portlet styling ---------- */
+
+        .portlet-search {
+            .search-layout .search-layout-content {
+                .menu {
+                   .search-facet { border-color: $color-line-golden; 
+                           .facet-value.current-term { 
+                            a { color: $color-text-purple; }
+                        }
+                   }
+                }
+                .result {
+                    .taglib-page-iterator .search-pages .page-links a,
+                    .taglib-page-iterator .search-pages .page-links span {
+                        border-color: $color-line-golden;
+                    }
+                    .results-grid {
+                        border-color: $color-line-golden;
+                        .results-row td { border-color: $color-line-golden; 
+                            .asset-entry {
+                                .asset-entry-categories, .asset-entry-tags {
+                                    a { color: $color-text-lightpurple; }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        
+        /* ---------- Web form portlet styling ---------- */
+        
+        .web-form-portlet {
+            .aui-fieldset-legend { @include portlet-title; }
+            .aui-fieldset-content {
+               background-color: $color-bg-golden; border-color: $color-line-golden; 
+               
+               .aui-field-text .aui-field-label, .aui-field-select .aui-field-label,
+               .aui-field-wrapper-content > .aui-field-label { color: $color-text-purple; }
+               
+            } 
+        }
+        
+        /* ---------- RSS portlet styling ---------- */
+
+        .portlet-rss {
+            .kluwer-feed {
+                .feed-title { @include portlet-title; }
+                .feed-entries {
+                    border-color: $color-text-golden;
+                    .feed-entry {
+                        border-color: $color-line-golden; 
+                        .feed-metadata {
+                            font-weight: normal;
+                        }
+                    }
+                }
+            }
+            &.golden {
+                .feed-entries { background-color: $color-bg-golden; }
+            }
+            
+            &.lightpurple {
+                .feed-entries { background-color: $color-bg-lightpurple; }
+            }
+            
+            &.purple {
+                .feed-entries { 
+                    background-color: $color-bg-purple; 
+                    .feed-entry { border-color: #FFFFFF; }
+                }
+            }
+        }        
+        
+        /* ---------- Kluwer Fiscaal+ portlet styling ---------- */
+
+        .kluwer-fiscaalplus-portlet {
+            .content {
+                background-color: $color-bg-golden; border-color: $color-line-golden;
+            }
+        }
+        
+        /* ---------- Kluwer Users list portlet styling ---------- */
+
+        .userslist-portlet {
+            .asset-abstract .asset-small-image img { border-color: $color-line-golden; }
+            .asset-content { 
+                .asset-title { 
+                    color: $color-text-purple;
+                } 
+            }
+            .asset-metadata .metadata-entry { font-weight: normal; }
+            
+            &.golden .asset-abstract.troika { background-color: $color-bg-golden; }
+            &.lightpurple .asset-abstract.troika { background-color: $color-bg-lightpurple; }
+            &.purple .asset-abstract.troika { background-color: $color-bg-purple; border-color: #FFFFFF; }
+        }
+        
+
+        /* ---------- Kluwer Users list portlet styling ---------- */
+        
+        .advertorialsdisplay-portlet {
+            .portlet-topper {
+                background-color: $color-text-purple;
+            }
+            .items {
+                border-top-color: $color-text-purple;
+                .item {
+                    background-color: $color-bg-golden;
+                    border-bottom-color: $color-text-golden;    
+                }
+            }
+        }
+        
+        /* ---------- Linkedin login portlet styling ---------- */
+        
+        .linkedin-registration-body {
+            background-color: $color-bg-golden; 
+            border-bottom-color: $color-line-golden;
+            border-top-color: $color-text-golden;
+             
+            .linkedin-reg-content {
+                background-color: $color-bg-lightpurple; 
+                border-bottom-color: $color-line-golden;
+                border-top-color: $color-text-golden;
+            }
+        }
+    }       
+}
+
+.portlet-message-boards .thread-view-controls{
+ display: none;
+}
+.portlet-message-boards #toggle_id_message_boards_view_message_thread {
+    display: none !important;
+}
+
+.portlet-message-boards .thread-controls + div .message-scroll + div{
+ display: none;
+}
+ body.taxlife #wrapper .portlet-asset-publisher .final-separator{
+ margin-bottom: 0 !important;
+}
+.portlet-message-boards .message-container{
+    display: block !important;
+}
+.ie7 .portlet-layout .portlet-body .portlet-body { padding-bottom:0px  !important;  margin-bottom:20px !important;}
+.ie7 #wrapper .web-form-portlet.two-column-layout .aui-fieldset-content .field2 .aui-field-choice { width:17%;}
+.ie7 #wrapper .web-form-portlet.two-column-layout .aui-fieldset-content .field11 .aui-field-choice .aui-field-content { margin:0px !important;}
+.ie7 #wrapper .web-form-portlet.two-column-layout .aui-fieldset-content .field11 .aui-field-choice .aui-field-content  .aui-field-label-inline-label{ width:323px;}
+.ie7 .portlet-layout .portlet-body .portlet-body {padding-bottom:0px  !important; margin-bottom:20px !important;}
+.ie7 .taxlife .portlet-boundary_kluwerproductslistnx_WAR_kluwershopproductsnxportlet_ .portlet-content-container {
+    position: relative;
+ float: left
+}
+
+body.taxlife  .columns-max .portlet-asset-publisher .taglib-asset-categories-summary .asset-category, 
+body.taxlife  .columns-max .portlet-asset-publisher .taglib-asset-tags-summary a {color:#6c366c;}
+.columns-max .buttons .refresh{ display:none; }
+body.taxlife  .columns-max .portlet-asset-publisher li.title-list .taglib-text {background-image: none;}
+body.taxlife  .columns-max .portlet-asset-publisher li.title-list {border-bottom: 1px solid #DDDDAA; 
+ border-top: 1px solid #999933;}
+ .taxlife .kluwer-structure .header-title {color:#636;}
+
+.ie8 #_142_flagsPopup css3-container,
+.ie7 #_142_flagsPopup css3-container {display:none;}
+
+.ie7 #_142_flagsPopup .aui-button-content input#_142_flagsSubmit{
+    border:none 0px !important;
+}
+.ie8 #_142_flagsPopup .aui-button-content input#_142_flagsSubmit {
+    border: 1px solid !important;
+    border-color: #C8C9CA #9E9E9E #9E9E9E #C8C9CA !important;
+}
+.ie8 #_142_flagsPopup .aui-button-content input#_142_flagsSubmit:hover,
+.ie7 #_142_flagsPopup .aui-button-content input#_142_flagsSubmit:hover { background: #b9ced9 url(../images/application/state_hover_bg.png) repeat-x 0 0 !important;
+    border-color: #627782 !important;
+    color: #369 !important; }
+
+ .ie8 #_142_flagsPopup .aui-button-content input#_142_flagsSubmit,
+ .ie7 #_142_flagsPopup .aui-button-content input#_142_flagsSubmit {
+ background: #D4D4D4 url(../images/portlet/header_bg.png) repeat-x 0 0 !important;
+color: #34404F;
+cursor: pointer;
+font-weight: bold;
+overflow: visible;
+padding: 5px !important;
+text-shadow: 1px 1px white !important;
+width: auto;
+behavior: url(/kluwer-demo-theme/css/pie.htc) !important;
+position: relative;
+border-radius:4px !important;
+}

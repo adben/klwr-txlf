@@ -1,0 +1,59 @@
+#if($theme_display.getThemeSetting('disable-global-navigation') == "true")
+    #set($navigationItems = $nav_items)
+    <nav class="$nav_css_class" id="navigation">
+#else
+    #set($navigationItems = $guestNavItems)
+    <nav id="navigation-non-editable">
+#end
+    <ul class="menu">
+        $theme.search()
+        #foreach ($nav_item in $navigationItems)
+            #if($page_group.type == 0 && $nav_item.getName() == "Blogs")
+                #set($isHomeHighlighted = false)
+            #end
+        #end
+        #foreach ($nav_item in $navigationItems)
+        	#if($theme_display.getThemeSetting('hide-homepage-navigation') != "true" || $nav_item.getLayout().friendlyURL != $nav_items.get(0).getLayout().getFriendlyURL())
+	            #if ($nav_item.isSelected() || $isHomeHighlighted || ($page_group.type == 0 && $nav_item.getName() == "Blogs"))
+	                #set($isHomeHighlighted = false)
+	                <li class="selected">
+	            #else
+	                <li>
+	            #end
+	            <a href="$nav_item.getURL()" $nav_item.getTarget()><span>$nav_item.icon() $nav_item.getName()</span></a>
+	            </li>
+            #end
+        #end
+    </ul>
+</nav>
+<nav id="subnavigation">
+    <div class="f-right">
+    	#set($webcontentId = $theme_display.getThemeSetting('subnavigation-webcontent-id'))
+    	$!journalContentUtil.getContent($getterUtil.getLong("$!group_id"), "$!webcontentId", null, "$!locale", $theme_display)
+        ##<div class="addthis_toolbox addthis_default_style">
+            ##<a class="addthis_button_twitter"></a>
+            ##<a class="addthis_button_email"></a>
+            ##<a class="addthis_button_compact"></a>
+            ##<a class="addthis_counter addthis_bubble_style"></a>
+        ##</div>
+        ##<script type="text/javascript">var addthis_config = {"data_track_clickback":true};</script>
+        ##<script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pubid=ra-4dc3fe442456b7c6"></script>
+    </div>
+    <ul class="child-menu">
+        #foreach ($nav_item in $navigationItems)
+            #if ($nav_item.isSelected() || $nav_item.isChildSelected())
+                #if ($nav_item.hasChildren())
+                    #foreach ($nav_child in $nav_item.getChildren())
+                        #if ($nav_child.isSelected() || $nav_child.isChildSelected())
+                            <li class="selected">
+                        #else
+                            <li>
+                        #end
+                            <a href="$nav_child.getURL()" $nav_child.getTarget()>$nav_child.getName()</a>
+                        </li>
+                    #end
+                #end
+            #end
+        #end
+    </ul>
+</nav>
